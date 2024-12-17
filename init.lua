@@ -8,6 +8,13 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
+-- Movement keys remap
+vim.keymap.set('n', 'j', '<Left>', { noremap = true, silent = true })
+vim.keymap.set('n', 'l', '<Down>', { noremap = true, silent = true })
+vim.keymap.set('n', 'k', '<Up>', { noremap = true, silent = true })
+vim.keymap.set('n', ';', '<Right>', { noremap = true, silent = true })
+
+
 -- Leader key
 vim.g.mapleader = " "
 
@@ -26,8 +33,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
-
-local opts = {}
 
 require("lazy").setup("plugins")
 
