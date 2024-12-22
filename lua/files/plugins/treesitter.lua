@@ -5,7 +5,7 @@ return {
         local conf = require("nvim-treesitter.configs")
         conf.setup(
         {
-            ensure_installed = 
+            ensure_installed =
             {
                 "arduino",
                 "bash",
@@ -48,6 +48,8 @@ return {
                 "xml",
                 "yaml",
             },
+
+            auto_install = true,
 
             highlight = { enable = true },
 
