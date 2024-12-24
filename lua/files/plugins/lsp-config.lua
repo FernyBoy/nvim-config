@@ -26,7 +26,6 @@ return {
                     "jsonnet_ls",
                     "ltex",
                     "texlab",
-                    "textlsp",
                     "lua_ls",
                     "powershell_es",
                     "basedpyright",
@@ -39,6 +38,7 @@ return {
                     "sourcery",
                     "sqls",
                     "taplo",
+                    "ts_ls",
                     "hydra_lsp",
                 }
             })
@@ -146,10 +146,10 @@ return {
             {
                 capabilities = capabilities
             })
-            lspconfig.sourcery.setup(
-            {
-                capabilities = capabilities
-            })
+            --lspconfig.sourcery.setup(
+            --{
+                --capabilities = capabilities
+            --})
             lspconfig.sqls.setup(
             {
                 capabilities = capabilities

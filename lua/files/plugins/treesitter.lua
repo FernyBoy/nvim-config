@@ -27,6 +27,7 @@ return {
                 "javascript",
                 "json",
                 "json5",
+                "latex",
                 "lua",
                 "luadoc",
                 "perl",
@@ -48,8 +49,6 @@ return {
                 "xml",
                 "yaml",
             },
-
-            auto_install = true,
 
             highlight = { enable = true },
 
