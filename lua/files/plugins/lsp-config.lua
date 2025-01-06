@@ -46,10 +46,28 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
             local lspconfig = require("lspconfig")
+
+            -- Suppress INFO signs globally
+            vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "" })
+
+            -- Configure diagnostic display
+            vim.diagnostic.config({
+                virtual_text = {
+                    severity = { min = vim.diagnostic.severity.WARN },
+                },
+                signs = {
+                    severity = { min = vim.diagnostic.severity.WARN },
+                },
+                underline = {
+                    severity = { min = vim.diagnostic.severity.WARN },
+                },
+            })
+
             lspconfig.harper_ls.setup(
             {
                 capabilities = capabilities
@@ -84,7 +102,7 @@ return {
             })
             lspconfig.jdtls.setup(
             {
-                capabilities = capabilities
+                capabilities = capabilities,
             })
             lspconfig.denols.setup(
             {
