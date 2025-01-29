@@ -68,6 +68,8 @@ return {
                 },
             })
 
+            vim.cmd [[ au BufRead,BufNewFile *.tpp set filetype=cpp ]]
+
             lspconfig.harper_ls.setup(
             {
                 capabilities = capabilities
@@ -78,7 +80,8 @@ return {
             })
             lspconfig.clangd.setup(
             {
-                capabilities = capabilities
+                capabilities = capabilities,
+                filetypes = { "c", "cpp", "objc", "objcpp", "tpp" }
             })
             lspconfig.harper_ls.setup(
             {
