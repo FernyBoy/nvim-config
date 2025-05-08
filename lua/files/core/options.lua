@@ -1,6 +1,6 @@
 -- Code numbers
 vim.opt.number = true
-vim.opt.relativenumber = true
+-- vim.opt.relativenumber = true
 
 -- Tabs
 vim.opt.expandtab = true
