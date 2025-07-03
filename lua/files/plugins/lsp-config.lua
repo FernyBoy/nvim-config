@@ -57,15 +57,7 @@ return {
 
             -- Configure diagnostic display
             vim.diagnostic.config({
-                virtual_text = {
-                    severity = { min = vim.diagnostic.severity.WARN },
-                },
-                signs = {
-                    severity = { min = vim.diagnostic.severity.WARN },
-                },
-                underline = {
-                    severity = { min = vim.diagnostic.severity.WARN },
-                },
+                virtual_text = false,
             })
 
             vim.cmd [[ au BufRead,BufNewFile *.tpp set filetype=cpp ]]
