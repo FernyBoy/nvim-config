@@ -32,7 +32,6 @@ return {
                     "jedi_language_server",
                     "mutt_ls",
                     "pylsp",
-                    "pylyzer",
                     "pyre",
                     "ruff",
                     "sourcery",
@@ -144,10 +143,6 @@ return {
                 capabilities = capabilities
             })
             lspconfig.pylsp.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.pylyzer.setup(
             {
                 capabilities = capabilities
             })
