@@ -3,8 +3,18 @@ return {
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        local builtin = require("telescope.builtin")
+        require('telescope').setup
+        {
+            pickers = 
+            {
+                find_files = 
+                {
+                    hidden = true
+                }
+            }
+        }
 
+        local builtin = require("telescope.builtin")
         vim.keymap.set('n', 'm', builtin.find_files, {})
         vim.keymap.set('n', '<C-m>', builtin.live_grep, {}) 
     end
