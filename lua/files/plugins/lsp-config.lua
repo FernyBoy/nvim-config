@@ -56,7 +56,7 @@ return {
 
             -- Configure diagnostic display
             vim.diagnostic.config({
-                virtual_text = false,
+                virtual_text = { severity = { min = vim.diagnostic.severity.ERROR }, },
             })
 
             vim.cmd [[ au BufRead,BufNewFile *.tpp set filetype=cpp ]]
