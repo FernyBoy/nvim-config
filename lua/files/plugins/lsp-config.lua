@@ -1,3 +1,4 @@
+
 return {
     {
         "williamboman/mason.nvim",
@@ -5,141 +6,100 @@ return {
             require("mason").setup()
         end
     },
+
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup{}})
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "basedpyright",
+                    "clangd",
+                    "fortls",
+                    "golangci_lint_ls",
+                    "gopls",
+                    "hydra_lsp",
+                    "jdtls",
+                    "jsonnet_ls",
+                    "lua_ls",
+                    "mutt_ls",
+                    "powershell_es",
+                    "ruff",
+                    "sqls",
+                    "taplo",
+                    "templ",
+                    "texlab",
+                }
+            })
         end
     },
+
     {
         "neovim/nvim-lspconfig",
-
         config = function()
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-            local lspconfig = require("lspconfig")
+            local capabilities =
+                require("cmp_nvim_lsp").default_capabilities()
 
             -- Suppress INFO signs globally
-            vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "" })
+            vim.fn.sign_define(
+                "DiagnosticSignInfo",
+                { text = "", texthl = "" }
+            )
 
-            -- Configure diagnostic display
+            -- Diagnostics configuration
             vim.diagnostic.config({
-                virtual_text = { severity = { min = vim.diagnostic.severity.ERROR }, },
+                virtual_text = {
+                    severity = {
+                        min = vim.diagnostic.severity.ERROR
+                    }
+                }
             })
 
-            vim.cmd [[ au BufRead,BufNewFile *.tpp set filetype=cpp ]]
+            -- Custom filetype
+            vim.cmd [[
+                au BufRead,BufNewFile *.tpp set filetype=cpp
+            ]]
 
-            lspconfig.harper_ls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.omnisharp.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.clangd.setup(
-            {
-                capabilities = capabilities,
+            -- Helper to avoid repetition
+            local function setup(server, opts)
+                opts = opts or {}
+                opts.capabilities = capabilities
+                vim.lsp.config(server, opts)
+                vim.lsp.enable(server)
+            end
+
+            setup("harper_ls")
+            setup("omnisharp")
+            setup("clangd", {
                 filetypes = { "c", "cpp", "objc", "objcpp", "tpp" }
             })
-            lspconfig.harper_ls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.fortls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.golangci_lint_ls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.gopls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.templ.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.jdtls.setup(
-            {
-                capabilities = capabilities,
-            })
-            lspconfig.denols.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.quick_lint_js.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.jsonnet_ls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.ltex.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.texlab.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.textlsp.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.lua_ls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.powershell_es.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.basedpyright.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.jedi_language_server.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.mutt_ls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.pylsp.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.pyre.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.ruff.setup(
-            {
-                capabilities = capabilities
-            })
-            --lspconfig.sourcery.setup(
-            --{
-                --capabilities = capabilities
-            --})
-            lspconfig.sqls.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.taplo.setup(
-            {
-                capabilities = capabilities
-            })
-            lspconfig.hydra_lsp.setup(
-            {
-                capabilities = capabilities
-            })
+            setup("fortls")
+            setup("golangci_lint_ls")
+            setup("gopls")
+            setup("templ")
+            setup("jdtls")
+            setup("denols")
+            setup("quick_lint_js")
+            setup("jsonnet_ls")
+            setup("ltex")
+            setup("texlab")
+            setup("lua_ls")
+            setup("powershell_es")
+            setup("basedpyright")
+            setup("jedi_language_server")
+            setup("mutt_ls")
+            setup("pylsp")
+            setup("pyre")
+            setup("ruff")
+            setup("sqls")
+            setup("taplo")
+            setup("hydra_lsp")
 
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+            vim.keymap.set(
+                "n",
+                "K",
+                vim.lsp.buf.hover,
+                {}
+            )
         end
     },
 }
