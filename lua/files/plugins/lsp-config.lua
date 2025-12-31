@@ -8,39 +8,7 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup(
-            {
-                ensure_installed =
-                {
-                    "harper_ls",
-                    "omnisharp",
-                    "clangd",
-                    "harper_ls",
-                    "fortls",
-                    "golangci_lint_ls",
-                    "gopls",
-                    "templ",
-                    "jdtls",
-                    "denols",
-                    "quick_lint_js",
-                    "jsonnet_ls",
-                    "ltex",
-                    "texlab",
-                    "lua_ls",
-                    "powershell_es",
-                    "basedpyright",
-                    "jedi_language_server",
-                    "mutt_ls",
-                    "pylsp",
-                    "pyre",
-                    "ruff",
-                    "sourcery",
-                    "sqls",
-                    "taplo",
-                    "ts_ls",
-                    "hydra_lsp",
-                }
-            })
+            require("mason-lspconfig").setup{}})
         end
     },
     {
