@@ -1,21 +1,22 @@
-return {    
-    "nvim-telescope/telescope.nvim", 
-    tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-        require('telescope').setup
-        {
-            pickers = 
-            {
-                find_files = 
-                {
-                    hidden = true
-                }
-            }
-        }
-
-        local builtin = require("telescope.builtin")
-        vim.keymap.set('n', 'm', builtin.find_files, {})
-        vim.keymap.set('n', '<C-m>', builtin.live_grep, {}) 
-    end
+return {
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      {
+        "<leader>fp",
+        function()
+          require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
+        end,
+        desc = "Find Plugin File",
+      },
+    },
+    opts = {
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { prompt_position = "top" },
+        sorting_strategy = "ascending",
+        winblend = 0,
+      },
+    },
+  },
 }
