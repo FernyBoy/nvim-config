@@ -3,18 +3,21 @@ return {
 
     branch = "v3.x",
 
-    dependencies = 
+    dependencies =
     {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
     },
 
-    filesystem = 
+    opts =
     {
-        filtered_items = 
+        filesystem =
         {
-            visible = true, -- Show hidden files by default
-        }
+            filtered_items =
+            {
+                visible = true, -- Show hidden files by default
+            }
+        },
     },
 }

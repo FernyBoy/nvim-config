@@ -9,8 +9,11 @@ return {
 
     {
         "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim" },
         config = function()
             require("mason-lspconfig").setup({
+                -- Los servidores se activan a mano en nvim-lspconfig
+                automatic_enable = false,
                 ensure_installed = {
                     "basedpyright",
                     "clangd",
@@ -35,15 +38,10 @@ return {
 
     {
         "neovim/nvim-lspconfig",
+        dependencies = { "williamboman/mason-lspconfig.nvim" },
         config = function()
             local capabilities =
                 require("cmp_nvim_lsp").default_capabilities()
-
-            -- Suppress INFO signs globally
-            vim.fn.sign_define(
-                "DiagnosticSignInfo",
-                { text = "", texthl = "" }
-            )
 
             -- Diagnostics configuration
             vim.diagnostic.config({
@@ -51,7 +49,15 @@ return {
                     severity = {
                         min = vim.diagnostic.severity.ERROR
                     }
-                }
+                },
+                -- Suppress INFO signs
+                signs = {
+                    severity = {
+                        vim.diagnostic.severity.ERROR,
+                        vim.diagnostic.severity.WARN,
+                        vim.diagnostic.severity.HINT,
+                    }
+                },
             })
 
             -- Custom filetype
@@ -59,47 +65,42 @@ return {
                 au BufRead,BufNewFile *.tpp set filetype=cpp
             ]]
 
-            -- Helper to avoid repetition
+            -- Helper to avoid repetition; skips servers whose binary is not installed
             local function setup(server, opts)
                 opts = opts or {}
                 opts.capabilities = capabilities
                 vim.lsp.config(server, opts)
+
+                local cmd = vim.lsp.config[server].cmd
+                if type(cmd) == "table" and vim.fn.executable(cmd[1]) == 0 then
+                    return
+                end
                 vim.lsp.enable(server)
             end
 
             setup("harper_ls")
             setup("omnisharp")
-            setup("clangd", {
-                filetypes = { "c", "cpp", "objc", "objcpp", "tpp" }
-            })
+            setup("clangd")
             setup("fortls")
             setup("golangci_lint_ls")
             setup("gopls")
             setup("templ")
             setup("jdtls")
-            setup("denols")
+            setup("vtsls")
             setup("quick_lint_js")
+            setup("jsonls")
             setup("jsonnet_ls")
             setup("ltex")
             setup("texlab")
             setup("lua_ls")
             setup("powershell_es")
             setup("basedpyright")
-            setup("jedi_language_server")
             setup("mutt_ls")
-            setup("pylsp")
-            setup("pyre")
             setup("ruff")
             setup("sqls")
             setup("taplo")
             setup("hydra_lsp")
-
-            vim.keymap.set(
-                "n",
-                "K",
-                vim.lsp.buf.hover,
-                {}
-            )
+            setup("racket_langserver")
         end
     },
 }

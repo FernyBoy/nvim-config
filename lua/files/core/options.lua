@@ -9,4 +9,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
 -- Word wrap
-vim.opt.wrap = false
+vim.opt.wrap = true
+
+-- System clipboard
+vim.opt.clipboard:append("unnamedplus")
