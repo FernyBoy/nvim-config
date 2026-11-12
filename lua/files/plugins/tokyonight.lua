@@ -4,18 +4,14 @@ return {
     priority = 1000,
     opts = {
         transparent = true,
-        styles = 
+        styles =
         {
             sidebars = "transparent",
             floats = "transparent",
         },
     },
-    config = function()
-        require("tokyonight").setup(
-        {
-            transparent = true,
-        })
+    config = function(_, opts)
+        require("tokyonight").setup(opts)
         vim.cmd("colorscheme tokyonight")
     end,
 }
-
